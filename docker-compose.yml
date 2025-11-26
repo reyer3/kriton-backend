@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=onbotgo_analytics
+      - POSTGRES_USER=api_etl_user
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - OLLAMA_HOST=http://ollama:11434
+    depends_on:
+      - postgres
+      - ollama
+    volumes:
+      - ./:/app
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=onbotgo_analytics
+      - POSTGRES_USER=api_etl_user
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  ollama_data:
+  postgres_data:

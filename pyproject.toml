@@ -1,0 +1,22 @@
+[project]
+name = "kriton-backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi==0.115.0",
+    "numpy==1.26.4",
+    "pandas==2.2.2",
+    "psycopg2-binary==2.9.9",
+    "pydantic==2.9.0",
+    "pydantic-settings==2.5.0",
+    "python-dotenv==1.0.1",
+    "python-multipart==0.0.9",
+    "redis==5.0.8",
+    "requests==2.32.3",
+    "spacy==3.7.5",
+    "sqlalchemy==2.0.35",
+    "uvicorn[standard]==0.30.0",
+    "google-generativeai",
+]

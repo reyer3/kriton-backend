@@ -1,0 +1,44 @@
+@host = http://localhost:8000
+@contentType = application/json
+
+### Health Check
+GET {{host}}/
+
+### Estadísticas Generales
+GET {{host}}/api/estadisticas
+
+### Lemas Disponibles
+GET {{host}}/api/lemas-disponibles
+
+### Preguntar - Análisis de Alquiler (Ollama/Gemini)
+POST {{host}}/api/preguntar
+Content-Type: {{contentType}}
+
+{
+    "pregunta": "Analiza los pagos de alquiler de este mes",
+    "session_id": "test-session-001"
+}
+
+### Preguntar - Análisis de Juicios
+POST {{host}}/api/preguntar
+Content-Type: {{contentType}}
+
+{
+    "pregunta": "Hubo demandas o juicios el mes pasado?",
+    "session_id": "test-session-001"
+}
+
+### Preguntar - Tema no encontrado (Prueba de error)
+POST {{host}}/api/preguntar
+Content-Type: {{contentType}}
+
+{
+    "pregunta": "Cuentame sobre los unicornios",
+    "session_id": "test-session-001"
+}
+
+### Obtener Historial de Sesión
+GET {{host}}/api/sesion/test-session-001/historial
+
+### Limpiar Sesión
+DELETE {{host}}/api/sesion/test-session-001
